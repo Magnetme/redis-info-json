@@ -15,7 +15,7 @@ function isTrue(value) {
 }
 
 function startProcessing(data) {
-	const lines = data.split("\n").filter((line) => line !== EMPTY_LINE);
+	const lines = data.split(/\r?\n|\r/).filter((line) => line !== EMPTY_LINE);
 
 	const res = {};
 	let currentLevel;
@@ -43,7 +43,7 @@ function writeOutputAsJson(data) {
 }
 
 process.stdin.on('readable', () => {
-	var chunk = process.stdin.read();
+	const chunk = process.stdin.read();
 	if (chunk !== null) {
 		data += chunk
 	}
